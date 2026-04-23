@@ -6,7 +6,8 @@ from django.conf import settings
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255,
+                            unique=True)
 
     def __str__(self) -> str:
         return self.name
@@ -21,7 +22,8 @@ class Actor(models.Model):
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=255, db_index=True)
+    title = models.CharField(max_length=255,
+                             db_index=True)
     description = models.TextField()
     actors = models.ManyToManyField(to=Actor,
                                     related_name="movies")
@@ -59,7 +61,8 @@ class MovieSession(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.movie.title} {self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"{self.movie.title} {
+        self.show_time.strftime('%Y-%m-%d %H:%M:%S')}"
 
 
 class Order(models.Model):
@@ -79,7 +82,8 @@ class Ticket(models.Model):
                                       on_delete=models.CASCADE,
                                       related_name="ms_tickets")
     order = models.ForeignKey(to=Order,
-                              on_delete=models.CASCADE, related_name="tickets")
+                              on_delete=models.CASCADE,
+                              related_name="tickets")
     row = models.IntegerField()
     seat = models.IntegerField()
 
